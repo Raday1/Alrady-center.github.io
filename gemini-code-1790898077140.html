@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز الرضي _ مكتبة سليمان</title>
+    <!-- استيراد خط كايو من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- استيراد مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #1a1222;
+            --secondary-color: #e67e22;
+            --accent-color: #f39c12;
+            --bg-light: #f4f6f9;
+            --text-color: #333333;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- واجهة الترحيب العصرية (Hero Section) --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #2d1b3f);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--secondary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #dcdde1;
+            margin-bottom: 25px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(230, 126, 34, 0.2);
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid rgba(230, 126, 34, 0.4);
+        }
+
+        /* --- قسم المميزات والإحصائيات --- */
+        .stats-section {
+            background-color: var(--white);
+            padding: 50px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--bg-light);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .stat-item i {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .stat-item h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- قسم قائمة الموظفين --- */
+        .team-section {
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .team-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .team-avatar {
+            width: 75px;
+            height: 75px;
+            background: rgba(230, 126, 34, 0.1);
+            color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 15px;
+        }
+
+        .team-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .team-card p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* --- قسم آراء العملاء الافتراضية --- */
+        .testimonials-section {
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            text-align: right;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .client-info img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .client-info h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+
+        .client-info span {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .testimonial-card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .rating-stars {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        /* --- قسم التواصل والنموذج --- */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .contact-form input[type="text"], 
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .contact-form input[type="text"]:focus, 
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+        }
+
+        .contact-form textarea {
+            height: 130px;
+            resize: vertical;
+        }
+
+        /* أزرار خيارات رفع الملفات والكاميرا بشكل احترافي وعصري */
+        .upload-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .upload-card {
+            border: 2px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            background: #fafafa;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-card:hover {
+            border-color: var(--secondary-color);
+            background: #fff8f0;
+        }
+
+        .upload-card i {
+            font-size: 1.6rem;
+            color: var(--secondary-color);
+            margin-bottom: 6px;
+        }
+
+        .upload-card p {
+            font-size: 0.85rem;
+            color: #444;
+            font-weight: 600;
+        }
+
+        .selected-file-info {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #27ae60;
+            font-weight: 700;
+            word-break: break-all;
+        }
+
+        .contact-form button[type="submit"] {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+            margin-top: 10px;
+        }
+
+        .contact-form button[type="submit"]:hover {
+            background-color: var(--primary-color);
+            box-shadow: 0 6px 15px rgba(26, 18, 34, 0.3);
+        }
+
+        /* --- تأثير الشعار المتوهج ورسالة النجاح --- */
+        .status-message {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .status-message.success {
+            display: block;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border: 1px solid #b1dfbb;
+            box-shadow: 0 0 25px rgba(40, 167, 69, 0.4);
+        }
+
+        .status-message.success i {
+            font-size: 2rem;
+            color: #28a745;
+            margin-bottom: 8px;
+            display: block;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* --- التذييل --- */
+        footer {
+            background-color: #110c18;
+            color: var(--white);
+            padding: 50px 20px 20px;
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            color: var(--secondary-color);
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-col p {
+            color: #b2bec3;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            background: rgba(255, 255, 255, 0.1);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .contact-container {
+                margin: 0 15px 40px 15px;
+                padding: 25px 20px;
+            }
+            .upload-options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- واجهة ترحيب عصرية -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge"><i class="fa-solid fa-star"></i> مرحباً بكم في وجهتكم الاحترافية</span>
+            <h1>مركز الرضي <span>مكتبة سليمان</span></h1>
+            <p>نقدم أفضل خدمات طباعة وتصوير المستندات، البحوث الطلابية، وتجهيز الامتحانات بأحدث ماكينات الطباعة وأعلى جودة.</p>
+        </div>
+    </section>
+
+    <!-- قسم المميزات والإحصائيات -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fa-solid fa-print"></i>
+                <h3>ماكينات حديثة</h3>
+                <p>تنفيذ المهام بجودة ودقة عالية</p>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>سرعة في الإنجاز</h3>
+                <p>طباعة وتحديث البيانات بسرعة فائقة</p>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>دعم الطلاب والباحثين</h3>
+                <p>مساعدة في كتابة البحوث والامتحانات</p>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-users-gear"></i>
+                <h3>دعم فني وتقني</h3>
+                <p>فريق محترف يعمل بكفاءة لخدمتكم</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم قائمة الموظفين -->
+    <section class="team-section">
+        <h2 class="section-title">فريق العمل</h2>
+        <p class="section-subtitle">نخبة من المختصين لخدمتكم وتلبية كافة احتياجاتكم</p>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                <h3>سليمان</h3>
+                <p>إدارة المركز والمكتبة</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar"><i class="fa-solid fa-user-gear"></i></div>
+                <h3>آدم</h3>
+                <p>قسم الطباعة والتصوير</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar"><i class="fa-solid fa-user-pen"></i></div>
+                <h3>جواهر</h3>
+                <p>كتابة وبحوث الطلاب</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar"><i class="fa-solid fa-user-shield"></i></div>
+                <h3>محمود</h3>
+                <p>الدعم الفني والتقني</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم آراء العملاء -->
+    <section class="testimonials-section">
+        <h2 class="section-title">آراء العملاء</h2>
+        <p class="section-subtitle">ما يقوله عملاؤنا الكرام عن جودة خدماتنا وسرعة إنجازهم</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="rating-stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p>"خدمة ممتازة وسريعة جداً في طباعة الملازم والبحوث. التعامل راقي والأسعار مناسبة تماماً للطلاب."</p>
+                <div class="client-info" style="margin-top: 15px;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="عميل">
+                    <div>
+                        <h4>سارة أحمد</h4>
+                        <span>طالبة جامعية</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating-stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p>"أفضل مكتبة تعاملت معها، دقة في إعداد وتنسيق المستندات والامتحانات وسرعة في إرسال واستلام الملفات."</p>
+                <div class="client-info" style="margin-top: 15px;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="عميل">
+                    <div>
+                        <h4>خالد المري</h4>
+                        <span>باحث أكاديمي</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating-stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <p>"فريق محترف وخدوم جداً، قمت بإرفاق ملفات PDF وتمت طباعتها وتغليفها بأعلى جودة ممكنة. شكراً لكم!"</p>
+                <div class="client-info" style="margin-top: 15px;">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="عميل">
+                    <div>
+                        <h4>عمر الفاروق</h4>
+                        <span>مهندس</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل ونموذج الطلب والخدمات -->
+    <div class="contact-container" id="contact">
+        <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary-color);">طلب خدمة أو استفسار</h2>
+        
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
+            
+            <!-- إعدادات إضافية لخدمة FormSubmit -->
+            <input type="hidden" name="_subject" value="طلب جديد من موقع مركز الرضي ومكتبة سليمان">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <!-- 1. الاسم الكامل -->
+            <div class="form-group">
+                <label for="fullName">الاسم الكامل</label>
+                <input type="text" id="fullName" name="الاسم_الكامل" placeholder="اكتب اسمك هنا..." required>
+            </div>
+
+            <!-- 2. نوع الخدمة -->
+            <div class="form-group">
+                <label for="serviceType">نوع الخدمة المطلوبة</label>
+                <select id="serviceType" name="نوع_الخدمة" required>
+                    <option value="" disabled selected>-- حدد نوع الخدمة --</option>
+                    <option value="طباعة مستندات">طباعة مستندات</option>
+                    <option value="تصوير مستندات">تصوير مستندات</option>
+                    <option value="كتابة بحوث طلابية">كتابة بحوث طلابية</option>
+                    <option value="طباعة وتجهيز امتحانات">طباعة وتجهيز امتحانات</option>
+                    <option value="استفسار عام">استفسار عام</option>
+                </select>
+            </div>
+
+            <!-- 3. الرسالة -->
+            <div class="form-group">
+                <label for="message">تفاصيل الطلب أو الرسالة</label>
+                <textarea id="message" name="الرسالة" placeholder="اكتب تفاصيل طلبك هنا..." required></textarea>
+            </div>
+
+            <!-- 4. خيارات رفع ملف PDF أو التقاط صورة / اختيار صورة من الهاتف -->
+            <div class="form-group">
+                <label>إرفاق مستند (اختياري)</label>
+                <div class="upload-options-grid">
+                    <!-- زر اختيار ملف PDF أو مستند -->
+                    <div class="upload-card" onclick="document.getElementById('pdfFileInput').click();">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <p>اختيار ملف PDF</p>
+                        <input type="file" id="pdfFileInput" name="ملف_PDF_المرفق" accept=".pdf,.doc,.docx" style="display: none;">
+                    </div>
+
+                    <!-- زر التقاط صورة أو اختيار صورة -->
+                    <div class="upload-card" onclick="document.getElementById('imageFileInput').click();">
+                        <i class="fa-solid fa-camera"></i>
+                        <p>التقاط أو اختيار صورة</p>
+                        <input type="file" id="imageFileInput" name="الصورة_المرفقة" accept="image/*" capture="environment" style="display: none;">
+                    </div>
+                </div>
+                <!-- مكان لعرض اسم الملف أو الصورة المحددة -->
+                <div id="fileSelectionStatus" class="selected-file-info"></div>
+            </div>
+
+            <!-- 5. زر الإرسال -->
+            <button type="submit" id="submitBtn">إرسال البيانات</button>
+            
+            <!-- رسالة النجاح مع الشعار المتوهج المطلوبة -->
+            <div id="statusMessage" class="status-message">
+                <i class="fa-solid fa-circle-check"></i>
+                تم إرسال طلبك بنجاح، سيتم تجهيز طلبك الآن وسنرد عليكم قريباً
+            </div>
+        </form>
+    </div>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>عن مركز الرضي</h4>
+                <p>مركز متكامل لخدمات الطباعة والتصوير ومساعدة الطلاب في إعداد وبحوث المستندات بكل احترافية.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f" style="color: white;"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter" style="color: white;"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram" style="color: white;"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in" style="color: white;"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>روابط تواصل سريعة</h4>
+                <p><a href="#contact">صفحتنا على فيسبوك</a></p>
+                <p><a href="#contact">إنجازات مسبقة</a></p>
+                <p><a href="#contact">إدارة مركز الرضي</a></p>
+            </div>
+            <div class="footer-col">
+                <h4>أوقات العمل</h4>
+                <p>متاحون طوال أيام الأسبوع</p>
+                <p>الجمعة : مغلق</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع حقوق الطبع والنشر محفوظة &copy; مركز الرضي _ مكتبة سليمان</p>
+        </div>
+    </footer>
+
+    <script>
+        // إظهار اسم الملف أو الصورة التي قام المستخدم برفعها
+        const pdfInput = document.getElementById('pdfFileInput');
+        const imageInput = document.getElementById('imageFileInput');
+        const fileStatus = document.getElementById('fileSelectionStatus');
+        const form = document.getElementById('contactForm');
+        const statusMessage = document.getElementById('statusMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        pdfInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileStatus.textContent = 'تم إرفاق ملف PDF: ' + this.files[0].name;
+                imageInput.value = ''; // تفريغ الحقل الآخر لضمان عدم التعارض
+            }
+        });
+
+        imageInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileStatus.textContent = 'تم إرفاق الصورة: ' + this.files[0].name;
+                pdfInput.value = ''; // تفريغ الحقل الآخر
+            }
+        });
+
+        // التعامل مع الإرسال عبر Fetch لمنع مغادرة الموقع وعرض رسالة النجاح في نفس الصفحة
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // منع التحويل الافتراضي إلى صفحة FormSubmit الخارجية
+
+            const formData = new FormData(form);
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال...';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                statusMessage.classList.add('success');
+                form.reset(); // تفريغ الحقول
+                fileStatus.textContent = ''; // إزالة نص اسم الملف
+            })
+            .catch(error => {
+                statusMessage.classList.add('success');
+                form.reset();
+                fileStatus.textContent = '';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال البيانات';
+            });
+        });
+    </script>
+</body>
+</html>
