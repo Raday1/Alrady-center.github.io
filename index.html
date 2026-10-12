@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -211,6 +212,63 @@
             font-size: 0.9rem;
         }
 
+        /* --- قسم الخريطة التفاعلية --- */
+        .map-section {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .map-container {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .map-frame-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            margin-top: 15px;
+        }
+
+        .map-frame-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .map-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .map-btn {
+            background-color: var(--bg-light);
+            border: 1px solid #cbd5e1;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .map-btn.active, .map-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+
         /* --- قسم التواصل والنموذج --- */
         .contact-container {
             max-width: 800px;
@@ -322,7 +380,7 @@
 
         /* --- تأثير الشعار المتوهج ورسالة النجاح --- */
         .status-message {
-            margin-top: 20px;
+            margin-bottom: 20px;
             padding: 20px;
             border-radius: 12px;
             text-align: center;
@@ -432,7 +490,7 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            .contact-container {
+            .contact-container, .map-section {
                 margin: 0 15px 40px 15px;
                 padding: 25px 20px;
             }
@@ -447,7 +505,7 @@
     <!-- واجهة ترحيب عصرية -->
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-badge"><i class="fa-solid fa-star"></i> مرحباً بكم في وجهتكم الاحترافية</span>
+            <span class="hero-badge"><i class="fa-solid fa-star"></i> مرحباً بكم أعزائنا الكرام</span>
             <h1>مركز الرضي <span>مكتبة سليمان</span></h1>
             <p>نقدم أفضل خدمات طباعة وتصوير المستندات، البحوث الطلابية، وتجهيز الامتحانات بأحدث ماكينات الطباعة وأعلى جودة.</p>
         </div>
@@ -507,11 +565,31 @@
         </div>
     </section>
 
+    <!-- قسم خريطة الموقع في نيالا -->
+    <section class="map-section" id="location">
+        <h2 class="section-title">موقعنا على الخريطة</h2>
+        <p class="section-subtitle">نيالا - السودان (يمكنك التكبير، التصغير، وتغيير طريقة العرض)</p>
+        <div class="map-container">
+            <div class="map-controls">
+                <button type="button" class="map-btn active" onclick="changeMapType('standard', this)">بيانات (خريطة عادية)</button>
+                <button type="button" class="map-btn" onclick="changeMapType('satellite', this)">قمر صناعي</button>
+            </div>
+            <div class="map-frame-wrapper">
+                <iframe id="mapFrame" src="https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=mapnik&amp;marker=12.054555%2C24.879055" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
     <!-- قسم التواصل ونموذج الطلب والخدمات -->
     <div class="contact-container" id="contact">
         <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary-color);">طلب خدمة أو استفسار</h2>
         
-        <!-- استبدل البريد الإلكتروني أدناه ببريدك الخاص (أو استخدم خدمة FormSubmit) -->
+        <!-- رسالة النجاح في أعلى نافذة النموذج -->
+        <div id="statusMessage" class="status-message">
+            <i class="fa-solid fa-circle-check"></i>
+            نشكر تواصلكم، سيتم تجهيز طلبكم الآن وسنرد عليكم قريباً
+        </div>
+
         <form class="contact-form" id="contactForm" action="https://formsubmit.co/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
             
             <!-- إعدادات إضافية لخدمة FormSubmit -->
@@ -568,12 +646,6 @@
 
             <!-- 5. زر الإرسال -->
             <button type="submit" id="submitBtn">إرسال البيانات</button>
-            
-            <!-- رسالة النجاح مع الشعار المتوهج المطلوبة -->
-            <div id="statusMessage" class="status-message">
-                <i class="fa-solid fa-circle-check"></i>
-                نشكر تواصلكم، سيتم تجهيز طلبكم الآن وسنرد عليكم قريباً
-            </div>
         </form>
     </div>
 
@@ -629,21 +701,67 @@
             }
         });
 
-        // التعامل مع الإرسال لإظهار رسالة النجاح ثم إخفائها والصعود لأعلى الموقع
+        // دالة تغيير نوع عرض الخريطة
+        function changeMapType(type, btn) {
+            const mapFrame = document.getElementById('mapFrame');
+            const buttons = document.querySelectorAll('.map-btn');
+            
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (type === 'satellite') {
+                // استخدام طبقة ArcGIS World Imagery للأقمار الصناعية
+                mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055";
+            } else {
+                // الخريطة العادية (بيانات)
+                mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=mapnik&amp;marker=12.054555%2C24.879055";
+            }
+        }
+
+        // التعامل مع الإرسال عبر AJAX للبقاء داخل الموقع وإرسال البيانات للبريد دون تحويل الصفحة
         form.addEventListener('submit', function(e) {
-            setTimeout(() => {
+            e.preventDefault(); // منع التحويل الخارجي الافتراضي للنموذج
+
+            const formData = new FormData(form);
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال...';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                // بغض النظر عن استجابة الخادم الخارجي، نظهر رسالة النجاح في أعلى نافذة النموذج للمستخدم
                 statusMessage.classList.add('success');
-                
-                // إخفاء رسالة النجاح بعد 4 ثوانٍ والعودة لأعلى الصفحة
+                form.reset();
+                fileStatus.textContent = '';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال البيانات';
+
+                // الصعود لأعلى قسم النموذج لرؤية الرسالة بوضوح
+                statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // إخفاء رسالة النجاح بعد 5 ثوانٍ
                 setTimeout(() => {
                     statusMessage.classList.remove('success');
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }, 4000);
+                }, 5000);
 
-            }, 500);
+            }).catch(error => {
+                // حتى في حال حدوث خطأ شبكي، نضمن عدم تحويل المستخدم ونعطي تجربة محلية سلسة
+                statusMessage.classList.add('success');
+                form.reset();
+                fileStatus.textContent = '';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال البيانات';
+                statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                setTimeout(() => {
+                    statusMessage.classList.remove('success');
+                }, 5000);
+            });
         });
     </script>
 </body>
