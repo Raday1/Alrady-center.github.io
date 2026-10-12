@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -631,12 +629,20 @@
             }
         });
 
-        // التعامل مع الإرسال لإظهار رسالة النجاح المتوهجة بسلاسة
+        // التعامل مع الإرسال لإظهار رسالة النجاح ثم إخفائها والصعود لأعلى الموقع
         form.addEventListener('submit', function(e) {
-            // ملاحظة: خدمة FormSubmit تتطلب إرسال النموذج عادياً لمرة واحدة لتفعيل البريد الإلكتروني.
-            // بمجرد تفعيله، ستصلك الملفات والبيانات مباشرة لبريدك.
             setTimeout(() => {
                 statusMessage.classList.add('success');
+                
+                // إخفاء رسالة النجاح بعد 4 ثوانٍ والعودة لأعلى الصفحة
+                setTimeout(() => {
+                    statusMessage.classList.remove('success');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }, 4000);
+
             }, 500);
         });
     </script>
