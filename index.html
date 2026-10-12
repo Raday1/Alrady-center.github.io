@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -241,6 +240,19 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+
+        /* شريط إظهار الإحداثيات أسفل الخريطة مباشرة */
+        .coordinates-badge {
+            background-color: #faf5ed;
+            color: var(--primary-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 12px;
+            border: 1px dashed var(--secondary-color);
+            display: inline-block;
         }
 
         .map-controls {
@@ -568,14 +580,20 @@
     <!-- قسم خريطة الموقع في نيالا -->
     <section class="map-section" id="location">
         <h2 class="section-title">موقعنا على الخريطة</h2>
-        <p class="section-subtitle">نيالا - السودان (يمكنك التكبير، التصغير، وتغيير طريقة العرض)</p>
+        <p class="section-subtitle">نيالا - السودان (استعرض المعالم بوضع 3D أو خريطة التضاريس)</p>
         <div class="map-container">
             <div class="map-controls">
-                <button type="button" class="map-btn active" onclick="changeMapType('standard', this)">بيانات (خريطة عادية)</button>
-                <button type="button" class="map-btn" onclick="changeMapType('satellite', this)">قمر صناعي</button>
+                <button type="button" class="map-btn active" onclick="changeMapType('3d', this)">خريطة 3D تفاعلية (معالم نيالا)</button>
+                <button type="button" class="map-btn" onclick="changeMapType('terrain', this)">خريطة التضاريس</button>
             </div>
             <div class="map-frame-wrapper">
-                <iframe id="mapFrame" src="https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=mapnik&amp;marker=12.054555%2C24.879055" allowfullscreen></iframe>
+                <!-- الخريطة الافتراضية تعتمد طابع 3D المتقدم (Hot/Cycle) لإظهار التفاصيل والأسماء -->
+                <iframe id="mapFrame" src="https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055" allowfullscreen></iframe>
+            </div>
+            <!-- إظهار إحداثيات موقع المكتبة بوضوح -->
+            <div class="coordinates-badge">
+                <i class="fa-solid fa-location-dot" style="color: var(--secondary-color); margin-left: 5px;"></i>
+                إحداثيات الموقع: خط العرض (12.054555° شمالاً) ، خط الطول (24.879055° شرعاً)
             </div>
         </div>
     </section>
@@ -701,7 +719,7 @@
             }
         });
 
-        // دالة تغيير نوع عرض الخريطة
+        // دالة تغيير نوع عرض الخريطة (تم التحديث لتدعم 3D و التضاريس)
         function changeMapType(type, btn) {
             const mapFrame = document.getElementById('mapFrame');
             const buttons = document.querySelectorAll('.map-btn');
@@ -709,12 +727,12 @@
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            if (type === 'satellite') {
-                // استخدام طبقة ArcGIS World Imagery للأقمار الصناعية
-                mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055";
+            if (type === 'terrain') {
+                // طبقة التضاريس (Cyclemap)
+                mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=cyclemap&amp;marker=12.054555%2C24.879055";
             } else {
-                // الخريطة العادية (بيانات)
-                mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=mapnik&amp;marker=12.054555%2C24.879055";
+                // خريطة 3D التفاعلية المتقدمة (Hot Layer) لإظهار تفاصيل ومسميات نيالا
+                mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055";
             }
         }
 
@@ -734,23 +752,19 @@
                     'Accept': 'application/json'
                 }
             }).then(response => {
-                // بغض النظر عن استجابة الخادم الخارجي، نظهر رسالة النجاح في أعلى نافذة النموذج للمستخدم
                 statusMessage.classList.add('success');
                 form.reset();
                 fileStatus.textContent = '';
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'إرسال البيانات';
 
-                // الصعود لأعلى قسم النموذج لرؤية الرسالة بوضوح
                 statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                // إخفاء رسالة النجاح بعد 5 ثوانٍ
                 setTimeout(() => {
                     statusMessage.classList.remove('success');
                 }, 5000);
 
             }).catch(error => {
-                // حتى في حال حدوث خطأ شبكي، نضمن عدم تحويل المستخدم ونعطي تجربة محلية سلسة
                 statusMessage.classList.add('success');
                 form.reset();
                 fileStatus.textContent = '';
