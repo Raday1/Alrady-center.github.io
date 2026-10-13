@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -197,6 +197,13 @@
             justify-content: center;
             font-size: 1.8rem;
             margin: 0 auto 15px;
+            overflow: hidden;
+        }
+
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .team-card h3 {
@@ -242,7 +249,6 @@
             border: 0;
         }
 
-        /* شريط إظهار الإحداثيات أسفل الخريطة مباشرة */
         .coordinates-badge {
             background-color: #faf5ed;
             color: var(--primary-color);
@@ -328,7 +334,6 @@
             resize: vertical;
         }
 
-        /* أزرار خيارات رفع الملفات والكاميرا بشكل احترافي وعصري */
         .upload-options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -390,7 +395,6 @@
             box-shadow: 0 6px 15px rgba(26, 18, 34, 0.3);
         }
 
-        /* --- تأثير الشعار المتوهج ورسالة النجاح --- */
         .status-message {
             margin-bottom: 20px;
             padding: 20px;
@@ -555,12 +559,16 @@
         <p class="section-subtitle">نخبة من المختصين لخدمتكم وتلبية كافة احتياجاتكم</p>
         <div class="team-grid">
             <div class="team-card">
-                <div class="team-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="team-avatar">
+                    <img src="https://scontent.frkk2-1.fna.fbcdn.net/v/t39.30808-6/475453634_122240516972351585_6130419266023307567_n.jpg" alt="سليمان">
+                </div>
                 <h3>سليمان</h3>
                 <p>إدارة المركز والمكتبة</p>
             </div>
             <div class="team-card">
-                <div class="team-avatar"><i class="fa-solid fa-user-gear"></i></div>
+                <div class="team-avatar">
+                    <img src="https://scontent.frkk2-2.fna.fbcdn.net/v/t39.30808-6/475390190_122240517386351585_2411985959648935401_n.jpg" alt="آدم">
+                </div>
                 <h3>آدم</h3>
                 <p>قسم الطباعة والتصوير</p>
             </div>
@@ -570,7 +578,9 @@
                 <p>كتابة وبحوث الطلاب</p>
             </div>
             <div class="team-card">
-                <div class="team-avatar"><i class="fa-solid fa-user-shield"></i></div>
+                <div class="team-avatar">
+                    <img src="https://scontent.frkk2-1.fna.fbcdn.net/v/t39.30808-6/475459392_122240517590351585_3230691236873528489_n.jpg" alt="محمود">
+                </div>
                 <h3>محمود</h3>
                 <p>الدعم الفني والتقني</p>
             </div>
@@ -587,10 +597,8 @@
                 <button type="button" class="map-btn" onclick="changeMapType('terrain', this)">خريطة التضاريس</button>
             </div>
             <div class="map-frame-wrapper">
-                <!-- الخريطة الافتراضية تعتمد طابع 3D المتقدم (Hot/Cycle) لإظهار التفاصيل والأسماء -->
                 <iframe id="mapFrame" src="https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055" allowfullscreen></iframe>
             </div>
-            <!-- إظهار إحداثيات موقع المكتبة بوضوح -->
             <div class="coordinates-badge">
                 <i class="fa-solid fa-location-dot" style="color: var(--secondary-color); margin-left: 5px;"></i>
                 إحداثيات الموقع: خط العرض (12.054555° شمالاً) ، خط الطول (24.879055° شرعاً)
@@ -602,7 +610,6 @@
     <div class="contact-container" id="contact">
         <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary-color);">طلب خدمة أو استفسار</h2>
         
-        <!-- رسالة النجاح في أعلى نافذة النموذج -->
         <div id="statusMessage" class="status-message">
             <i class="fa-solid fa-circle-check"></i>
             نشكر تواصلكم، سيتم تجهيز طلبكم الآن وسنرد عليكم قريباً
@@ -610,18 +617,15 @@
 
         <form class="contact-form" id="contactForm" action="https://formsubmit.co/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
             
-            <!-- إعدادات إضافية لخدمة FormSubmit -->
             <input type="hidden" name="_subject" value="طلب جديد من موقع مركز الرضي ومكتبة سليمان">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
 
-            <!-- 1. الاسم الكامل -->
             <div class="form-group">
                 <label for="fullName">الاسم الكامل</label>
                 <input type="text" id="fullName" name="الاسم_الكامل" placeholder="اكتب اسمك هنا..." required>
             </div>
 
-            <!-- 2. نوع الخدمة -->
             <div class="form-group">
                 <label for="serviceType">نوع الخدمة المطلوبة</label>
                 <select id="serviceType" name="نوع_الخدمة" required>
@@ -634,35 +638,29 @@
                 </select>
             </div>
 
-            <!-- 3. الرسالة -->
             <div class="form-group">
                 <label for="message">تفاصيل الطلب أو الرسالة</label>
                 <textarea id="message" name="الرسالة" placeholder="اكتب تفاصيل طلبك هنا..." required></textarea>
             </div>
 
-            <!-- 4. خيارات رفع ملف PDF أو التقاط صورة / اختيار صورة من الهاتف -->
             <div class="form-group">
                 <label>إرفاق مستند (اختياري)</label>
                 <div class="upload-options-grid">
-                    <!-- زر اختيار ملف PDF أو مستند -->
                     <div class="upload-card" onclick="document.getElementById('pdfFileInput').click();">
                         <i class="fa-solid fa-file-pdf"></i>
                         <p>اختيار ملف PDF</p>
                         <input type="file" id="pdfFileInput" name="ملف_PDF_المرفق" accept=".pdf,.doc,.docx" style="display: none;">
                     </div>
 
-                    <!-- زر التقاط صورة أو اختيار صورة -->
                     <div class="upload-card" onclick="document.getElementById('imageFileInput').click();">
                         <i class="fa-solid fa-camera"></i>
                         <p>التقاط أو اختيار صورة</p>
                         <input type="file" id="imageFileInput" name="الصورة_المرفقة" accept="image/*" capture="environment" style="display: none;">
                     </div>
                 </div>
-                <!-- مكان لعرض اسم الملف أو الصورة المحددة -->
                 <div id="fileSelectionStatus" class="selected-file-info"></div>
             </div>
 
-            <!-- 5. زر الإرسال -->
             <button type="submit" id="submitBtn">إرسال البيانات</button>
         </form>
     </div>
@@ -698,7 +696,6 @@
     </footer>
 
     <script>
-        // إظهار اسم الملف أو الصورة التي قام المستخدم برفعها
         const pdfInput = document.getElementById('pdfFileInput');
         const imageInput = document.getElementById('imageFileInput');
         const fileStatus = document.getElementById('fileSelectionStatus');
@@ -708,18 +705,17 @@
         pdfInput.addEventListener('change', function() {
             if (this.files && this.files.length > 0) {
                 fileStatus.textContent = 'تم إرفاق ملف PDF: ' + this.files[0].name;
-                imageInput.value = ''; // تفريغ الحقل الآخر لضمان عدم التعارض
+                imageInput.value = '';
             }
         });
 
         imageInput.addEventListener('change', function() {
             if (this.files && this.files.length > 0) {
                 fileStatus.textContent = 'تم إرفاق الصورة: ' + this.files[0].name;
-                pdfInput.value = ''; // تفريغ الحقل الآخر
+                pdfInput.value = '';
             }
         });
 
-        // دالة تغيير نوع عرض الخريطة (تم التحديث لتدعم 3D و التضاريس)
         function changeMapType(type, btn) {
             const mapFrame = document.getElementById('mapFrame');
             const buttons = document.querySelectorAll('.map-btn');
@@ -728,17 +724,14 @@
             btn.classList.add('active');
 
             if (type === 'terrain') {
-                // طبقة التضاريس (Cyclemap)
                 mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=cyclemap&amp;marker=12.054555%2C24.879055";
             } else {
-                // خريطة 3D التفاعلية المتقدمة (Hot Layer) لإظهار تفاصيل ومسميات نيالا
                 mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055";
             }
         }
 
-        // التعامل مع الإرسال عبر AJAX للبقاء داخل الموقع وإرسال البيانات للبريد دون تحويل الصفحة
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // منع التحويل الخارجي الافتراضي للنموذج
+            e.preventDefault();
 
             const formData = new FormData(form);
             const submitBtn = document.getElementById('submitBtn');
