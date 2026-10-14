@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- استيراد مكتبة أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+   
     <style>
         :root {
             --primary-color: #1a1222;
@@ -309,7 +309,7 @@
             font-size: 0.95rem;
         }
 
-        .contact-form input[type="text"], 
+        .contact-form input[type="text"],
         .contact-form select,
         .contact-form textarea {
             width: 100%;
@@ -322,7 +322,7 @@
             background-color: var(--white);
         }
 
-        .contact-form input[type="text"]:focus, 
+        .contact-form input[type="text"]:focus,
         .contact-form select:focus,
         .contact-form textarea:focus {
             border-color: var(--secondary-color);
@@ -609,14 +609,14 @@
     <!-- قسم التواصل ونموذج الطلب والخدمات -->
     <div class="contact-container" id="contact">
         <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary-color);">طلب خدمة أو استفسار</h2>
-        
+       
         <div id="statusMessage" class="status-message">
             <i class="fa-solid fa-circle-check"></i>
             نشكر تواصلكم، سيتم تجهيز طلبكم الآن وسنرد عليكم قريباً
         </div>
 
         <form class="contact-form" id="contactForm" action="https://formsubmit.co/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
-            
+           
             <input type="hidden" name="_subject" value="طلب جديد من موقع مركز الرضي ومكتبة سليمان">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
@@ -699,8 +699,6 @@
         const pdfInput = document.getElementById('pdfFileInput');
         const imageInput = document.getElementById('imageFileInput');
         const fileStatus = document.getElementById('fileSelectionStatus');
-        const form = document.getElementById('contactForm');
-        const statusMessage = document.getElementById('statusMessage');
 
         pdfInput.addEventListener('change', function() {
             if (this.files && this.files.length > 0) {
@@ -719,7 +717,7 @@
         function changeMapType(type, btn) {
             const mapFrame = document.getElementById('mapFrame');
             const buttons = document.querySelectorAll('.map-btn');
-            
+           
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
@@ -729,47 +727,6 @@
                 mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055";
             }
         }
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'جاري الإرسال...';
-
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                statusMessage.classList.add('success');
-                form.reset();
-                fileStatus.textContent = '';
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'إرسال البيانات';
-
-                statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                setTimeout(() => {
-                    statusMessage.classList.remove('success');
-                }, 5000);
-
-            }).catch(error => {
-                statusMessage.classList.add('success');
-                form.reset();
-                fileStatus.textContent = '';
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'إرسال البيانات';
-                statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                setTimeout(() => {
-                    statusMessage.classList.remove('success');
-                }, 5000);
-            });
-        });
     </script>
 </body>
-</html>
+</html> 
