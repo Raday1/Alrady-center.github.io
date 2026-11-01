@@ -613,11 +613,11 @@
        
         <div id="statusMessage" class="status-message">
             <i class="fa-solid fa-circle-check"></i>
-            نشكر تواصلكم، سيتم تجهيز طلبكم الآن وسنرد عليكم قريباً
+            تم إرسال رسالتك بنجاح الي إدارة مركز الرضي سيتم معاودة الإتصال بك قريبا
         </div>
 
-        <!-- تم إعادة ربط النموذج ليرسل البيانات والملفات إلى بريدك الإلكتروني -->
-        <form class="contact-form" id="contactForm" action="https://formsubmit.co/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
+        <!-- تم تحديث النموذج وإضافة معالج JavaScript للإرسال بدون مغادرة الصفحة -->
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
            
             <input type="hidden" name="_subject" value="طلب جديد من موقع مركز الرضي ومكتبة سليمان">
             <input type="hidden" name="_captcha" value="false">
@@ -729,6 +729,54 @@
                 mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=24.86446%2C12.03232%2C24.89046%2C12.07232&amp;layer=hot&amp;marker=12.054555%2C24.879055";
             }
         }
+
+        // --- التعديل البرمجي الخاص بالإرسال بالـ AJAX واستلام ملفات PDF وإظهار رسالة النجاح لمدة 5 ثوانٍ ---
+        const contactForm = document.getElementById('contactForm');
+        const statusMessage = document.getElementById('statusMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // منع إعادة توجيه الصفحة أو الخروج منها
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال...';
+
+            const formData = new FormData(contactForm);
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // تفريغ النموذج وإخفاء اسم الملف المرفق
+                    contactForm.reset();
+                    fileStatus.textContent = '';
+
+                    // إظهار رسالة النجاح المخصصة
+                    statusMessage.className = 'status-message success';
+                    statusMessage.style.display = 'block';
+
+                    // إخفاء الرسالة تلقائياً بعد 5 ثوانٍ
+                    setTimeout(function() {
+                        statusMessage.style.display = 'none';
+                    }, 5000);
+                } else {
+                    alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('حدث خطأ في الاتصال.');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال البيانات';
+            });
+        });
     </script>
 </body>
 </html>
