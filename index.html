@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- استيراد مكتبة أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
+
     <style>
         :root {
             --primary-color: #1a1222;
@@ -397,8 +398,8 @@
         }
 
         .status-message {
-            margin-bottom: 20px;
-            padding: 20px;
+            margin-top: 15px;
+            padding: 15px;
             border-radius: 12px;
             text-align: center;
             font-weight: 700;
@@ -415,9 +416,9 @@
         }
 
         .status-message.success i {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #28a745;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
             animation: bounce 1s infinite alternate;
         }
@@ -610,15 +611,9 @@
     <!-- قسم التواصل ونموذج الطلب والخدمات -->
     <div class="contact-container" id="contact">
         <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary-color);">طلب خدمة أو استفسار</h2>
-       
-        <div id="statusMessage" class="status-message">
-            <i class="fa-solid fa-circle-check"></i>
-            تم إرسال رسالتك بنجاح الي مكتبه الرضي
-        </div>
 
-        <!-- تم تحديث النموذج وإضافة معالج JavaScript للإرسال بدون مغادرة الصفحة -->
         <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/alshftmhmwd9@gmail.com" method="POST" enctype="multipart/form-data">
-           
+
             <input type="hidden" name="_subject" value="طلب جديد من موقع مركز الرضي ومكتبة سليمان">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
@@ -664,6 +659,13 @@
             </div>
 
             <button type="submit" id="submitBtn">إرسال البيانات</button>
+
+            <!-- رسالة النجاح أصبحت تحت زر إرسال البيانات مباشرة -->
+            <div id="statusMessage" class="status-message">
+                <i class="fa-solid fa-circle-check"></i>
+                تم إرسال رسالتك بنجاح الي مكتبة الرضي
+            </div>
+
         </form>
     </div>
 
@@ -719,7 +721,7 @@
         function changeMapType(type, btn) {
             const mapFrame = document.getElementById('mapFrame');
             const buttons = document.querySelectorAll('.map-btn');
-           
+
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
@@ -730,13 +732,13 @@
             }
         }
 
-        // --- التعديل البرمجي الخاص بالإرسال بالـ AJAX واستلام ملفات PDF وإظهار رسالة النجاح لمدة 5 ثوانٍ ---
+        // --- المعالج البرمجي الخاص بالإرسال وإظهار رسالة النجاح تحت الزر لمدة 5 ثوانٍ ---
         const contactForm = document.getElementById('contactForm');
         const statusMessage = document.getElementById('statusMessage');
         const submitBtn = document.getElementById('submitBtn');
 
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // منع إعادة توجيه الصفحة أو الخروج منها
+            e.preventDefault();
 
             submitBtn.disabled = true;
             submitBtn.textContent = 'جاري الإرسال...';
@@ -752,15 +754,12 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // تفريغ النموذج وإخفاء اسم الملف المرفق
                     contactForm.reset();
                     fileStatus.textContent = '';
 
-                    // إظهار رسالة النجاح المخصصة
                     statusMessage.className = 'status-message success';
                     statusMessage.style.display = 'block';
 
-                    // إخفاء الرسالة تلقائياً بعد 5 ثوانٍ
                     setTimeout(function() {
                         statusMessage.style.display = 'none';
                     }, 5000);
@@ -780,3 +779,4 @@
     </script>
 </body>
 </html>
+
